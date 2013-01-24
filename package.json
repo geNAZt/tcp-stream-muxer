@@ -1,0 +1,30 @@
+{
+  "name": "tcp-stream-muxer",
+  "version": "0.0.1",
+  "author": "Fabian Faßbender <fabian.fassbender42@googlemail.com>",
+  "description": "Muxing Streams to get trough one TCP Conenction",
+  "contributors": [ 
+    {
+      "name": "Fabian Faßbender",
+      "email": "fabian.fassbender42@googlemail.com"
+    } 
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geNAZt/tcp-stream-muxer.git"
+  },
+  "keywords": [
+    "muxing",
+    "tcp",
+    "stream",
+    "demuxing"
+  ],
+  "dependencies" : {
+
+  },
+  
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.8"
+  }
+}
