@@ -1,6 +1,6 @@
 {
   "name": "tcp-stream-muxer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Fabian Faßbender <fabian.fassbender42@googlemail.com>",
   "description": "Muxing Streams to get trough one TCP Conenction",
   "contributors": [ 
