@@ -13,6 +13,7 @@
     "type": "git",
     "url": "https://github.com/geNAZt/tcp-stream-muxer.git"
   },
+  "main": "./lib/tcp-muxer.js",
   "keywords": [
     "muxing",
     "tcp",
