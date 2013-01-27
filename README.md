@@ -77,6 +77,11 @@ server.on('connection', function(con) {
 ```
 
 Changelog:
+v0.0.6:
+* Fixed memory leakage, holding Buffer too long is not good :D
+* Added Test case: overhead.js - Showing how much overhead the muxer is producing
+* Added Test case: leakage.js - Showing the heapUsed bytes during sending data
+
 v0.0.5:
 * Fixed a bug where i keep getting wrong buffer slices (very rare bug :D)
 
