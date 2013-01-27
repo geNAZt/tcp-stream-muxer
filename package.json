@@ -1,6 +1,6 @@
 {
   "name": "tcp-stream-muxer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": {
     "name": "Fabian Faßbender",
     "email": "fabian.fassbender42@googlemail.com"
@@ -27,9 +27,5 @@
   "license": "MIT",
   "engines": {
     "node": ">=0.8"
-  },
-  "readme": "tcp-stream-muxer\r\n=============\r\n\r\nThis library enables you to send multiple Streams over one connection. It uses Buffers to send data on the TCP channel. So the overhead is minimal.\r\n\r\nTo create a MuxServer (tcp server):\r\n```javascript\r\nvar Muxer = require('tcp-stream-muxer');\r\nvar server = new Muxer.MuxServer(12345);\r\n```\r\n\r\nTo create a MuxClient (tcp client):\r\n```javascript\r\nvar Muxer = require('tcp-stream-muxer');\r\nvar server = new Muxer.MuxClient(12345);\r\n```\r\n\r\nThe MuxServer is an EventEmitter with following events:\r\n* connection - Emits when a new Client connects to a MuxServer\r\n\r\nThe connection also is an EventEmitter:\r\n* stream - Emits if the Client creates a new Stream\r\n\r\nEach Stream has a EventEmitter:\r\n* data - The data that comes out of the stream\r\n* end - If the Stream gets terminated\r\n\r\nEach one, the Server and the Client, have a StreamPool per Connection. To access it you need a connection on the server. Creating new Streams in tcp-stream-muxer:\r\n\r\nServer:\r\n```javascript\r\nvar Muxer = require('tcp-stream-muxer');\r\nvar server = new Muxer.MuxServer(12345);\r\nserver.on('connection', function(con) {\r\n    //Here you can access the connection StreamPool and create Streams\r\n    var stream = con.StreamPool.createStream({type: \"update\", file: \"xy.js\"});\r\n    stream.write(new Buffer(\"console.log('Hello');\"));\r\n});\r\n```\r\n\r\nThe client that accepts this stream:\r\n```javascript\r\nvar Muxer = require('tcp-stream-muxer');\r\nvar client = new Muxer.MuxClient(12345);\r\nclient.on('stream', function(stream) {\r\n    console.log(stream.meta); //{type: \"update\", file: \"xy.js\"}\r\n    stream.on('data', function (data) {\r\n        console.log(data.toString()); //console.log('Hello');\r\n    };\r\n});\r\n```\r\n\r\nClient:\r\n```javascript\r\nvar Muxer = require('tcp-stream-muxer');\r\nvar client = new Muxer.MuxClient(12345);\r\nvar stream = client.StreamPool.createStream({type: \"update\", file: \"xy.js\"});\r\nstream.write(new Buffer(\"console.log('Hello');\"));\r\n```\r\n\r\nThe server that accepts this stream:\r\n```javascript\r\nvar Muxer = require('tcp-stream-muxer');\r\nvar server = new Muxer.MuxServer(12345);\r\nserver.on('connection', function(con) {\r\n    con.on('stream', function (stream) {\r\n        console.log(stream.meta); //{type: \"update\", file: \"xy.js\"}\r\n        stream.on('data', function (data) {\r\n            console.log(data.toString()); //console.log('Hello');\r\n        };\r\n    }\r\n});\r\n```",
-  "readmeFilename": "README.md",
-  "_id": "tcp-stream-muxer@0.0.2",
-  "_from": "tcp-stream-muxer"
+  }
 }

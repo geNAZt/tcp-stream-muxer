@@ -33,29 +33,33 @@ var Muxer = require('tcp-stream-muxer');
 var server = new Muxer.MuxServer(12345);
 server.on('connection', function(con) {
     //Here you can access the connection StreamPool and create Streams
-    var stream = con.StreamPool.createStream({type: "update", file: "xy.js"});
-    stream.write(new Buffer("console.log('Hello');"));
+    con.StreamPool.createStream({type: "update", file: "xy.js"}, function (stream) {
+        stream.write(new Buffer("console.log('Hello');"));
+    };
 });
 ```
 
 The client that accepts this stream:
 ```javascript
 var Muxer = require('tcp-stream-muxer');
-var client = new Muxer.MuxClient(12345);
-client.on('stream', function(stream) {
-    console.log(stream.meta); //{type: "update", file: "xy.js"}
-    stream.on('data', function (data) {
-        console.log(data.toString()); //console.log('Hello');
-    };
+var client = new Muxer.MuxClient(12345, function() {
+    client.on('stream', function(stream) {
+        console.log(stream.meta); //{type: "update", file: "xy.js"}
+        stream.on('data', function (data) {
+            console.log(data.toString()); //console.log('Hello');
+        };
+    });
 });
 ```
 
 Client:
 ```javascript
 var Muxer = require('tcp-stream-muxer');
-var client = new Muxer.MuxClient(12345);
-var stream = client.StreamPool.createStream({type: "update", file: "xy.js"});
-stream.write(new Buffer("console.log('Hello');"));
+var client = new Muxer.MuxClient(12345, function () {
+    client.StreamPool.createStream({type: "update", file: "xy.js"}, function (stream) {
+        stream.write(new Buffer("console.log('Hello');"));
+    });
+});
 ```
 
 The server that accepts this stream:
@@ -73,8 +77,13 @@ server.on('connection', function(con) {
 ```
 
 Changelog:
+v0.0.4:
+* Removed the return from the StreamPool. If you want to have the stream you must have an ack callback. It gets the stream.
+* Added a connected callback to the client. It gets called if a connection is ready to go
+* Finally added the util file. Forgot it sry.....
+
 v0.0.3:
-* Added utilities for sending Files over a stream. Accessable via require('tcp-stream-muxer').util.
+* Added utilities for sending Files over a stream. Accessible via require('tcp-stream-muxer').util.
 * Added the util Function sendFile(filename, stream) to send the file filename over the stream stream
 * Added the util Function receiveFile(filename, stream) to receive the file from the stream and save them to filename
 * Added a second parameter to the createStream function. It is a callback that gets fired when the other site has created the stream.
