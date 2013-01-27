@@ -71,3 +71,10 @@ server.on('connection', function(con) {
     }
 });
 ```
+
+Changelog:
+v0.0.3:
+* Added utilities for sending Files over a stream. Accessable via require('tcp-stream-muxer').util.
+* Added the util Function sendFile(filename, stream) to send the file filename over the stream stream
+* Added the util Function receiveFile(filename, stream) to receive the file from the stream and save them to filename
+* Added a second parameter to the createStream function. It is a callback that gets fired when the other site has created the stream.
