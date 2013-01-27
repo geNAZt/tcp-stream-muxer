@@ -1,6 +1,6 @@
 {
   "name": "tcp-stream-muxer",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "author": {
     "name": "Fabian Faßbender",
     "email": "fabian.fassbender42@googlemail.com"

@@ -77,6 +77,11 @@ server.on('connection', function(con) {
 ```
 
 Changelog:
+v0.0.7:
+* Piping error and close events through the client.
+* Fixed a bug where the maximum amount of streams is not 255
+* Added Test case: streamOverflow.js - Create streams, the client should crash if more than 255 streams are alive, the server should run
+
 v0.0.6:
 * Fixed memory leakage, holding Buffer too long is not good :D
 * Added Test case: overhead.js - Showing how much overhead the muxer is producing
