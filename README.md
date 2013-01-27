@@ -77,6 +77,9 @@ server.on('connection', function(con) {
 ```
 
 Changelog:
+v0.0.5:
+* Fixed a bug where i keep getting wrong buffer slices (very rare bug :D)
+
 v0.0.4:
 * Removed the return from the StreamPool. If you want to have the stream you must have an ack callback. It gets the stream.
 * Added a connected callback to the client. It gets called if a connection is ready to go
