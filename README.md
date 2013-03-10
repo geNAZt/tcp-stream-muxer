@@ -77,6 +77,10 @@ server.on('connection', function(con) {
 ```
 
 Changelog:
+v0.1.0:
+* Fixing a bug where pipe chaining breaks
+* Fixed a typo in the Package description
+
 v0.0.7:
 * Piping error and close events through the client.
 * Fixed a bug where the maximum amount of streams is not 255
